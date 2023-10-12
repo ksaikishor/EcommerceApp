@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">EcommerceApp</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="login_again">Already Have one , Login here</string>
+    <string name="checkout">Checkout</string>
+    <string name="welcome_note">Welcome User</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiry_date">Expiry Date (MM/YY)</string>
+    <string name="cvv">CVV</string>
+    <string name="submit">Submit</string>
+    <string name="go_to_home">Go to Home</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="title">title</string>
+    <string name="product_description">Product Description</string>
+    <string name="count">count</string>
+    <string name="price">price</string>
+
+</resources>

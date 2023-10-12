@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".RegisterFragment">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:hint="@string/username"
+        android:id="@+id/usernameRegInputLayout">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/usernameReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:id="@+id/emailLayout"
+        android:hint="Email">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:id="@+id/addressLayout"
+        android:hint="Address">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+        android:id="@+id/passwordLayout"
+        android:hint="password"
+        android:inputType="textPassword">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:text="@string/register" />
+
+    <Button
+        android:id="@+id/LoginAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:text="@string/login_again" />
+
+
+</FrameLayout>

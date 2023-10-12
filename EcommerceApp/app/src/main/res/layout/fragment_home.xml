@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:id="@+id/homeFragment"
+    tools:context=".HomeFragment">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/welcomeNote"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:text="@string/welcome_note" />
+
+    <Button
+        android:id="@+id/cartFromHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/myColor"
+        android:drawableLeft="@drawable/baseline_shopping_cart_24"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHome"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
