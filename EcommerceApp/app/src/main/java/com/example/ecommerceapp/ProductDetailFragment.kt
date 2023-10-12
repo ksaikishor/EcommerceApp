@@ -57,14 +57,13 @@ class ProductDetailFragment : Fragment() {
         addToCart = view.findViewById(R.id.addToCart)
 
         val cartViewModel = (requireActivity() as MainActivity).cartViewModel
-        cartButton.text ="("+cartViewModel?.cartList?.size+")"
+        cartButton.text ="("+cartViewModel?.getCartItemCount()+")"
 
         val productId = arguments?.getInt("productId") ?: -1
         productViewModel.fetchProduct(productId)
         productViewModel.product.observe(viewLifecycleOwner){product->
             productDescriptionTextView.text = "Description:"+"\n"+product.description
             productPrice.text = "$ "+product.price.toString()
-
             rating.text =product.rating?.rate.toString()+" Rating"
             Glide.with(view.context).load(product.image).into(productImageView)
         }
@@ -76,7 +75,7 @@ class ProductDetailFragment : Fragment() {
             productViewModel.product.observe(viewLifecycleOwner) { product ->
                 val cartItem = Product(productId, product.title, product.price,product.description,product.category, product.image,product.rating)
                 cartViewModel?.addItemToCart(cartItem)
-                cartButton.text ="("+cartViewModel?.cartList?.size+")"
+                cartButton.text ="("+cartViewModel?.getCartItemCount()+")"
             }
         }
 

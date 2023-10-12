@@ -23,7 +23,7 @@ class CartFragment : Fragment(), ItemOnClick {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cartAdapter: CartAdapter
-    private var productItemList: MutableList<Product> = mutableListOf()
+    private var productItemList: MutableList<CartItem> = mutableListOf()
     private lateinit var checkout: Button
     private lateinit var backButton: ImageView
     private lateinit var cartViewModel:CartViewModel
@@ -41,9 +41,16 @@ class CartFragment : Fragment(), ItemOnClick {
         cartAdapter = CartAdapter(productItemList, this)
         recyclerView.adapter = cartAdapter
         val cartViewModel = (requireActivity() as MainActivity).cartViewModel
-        if (cartViewModel != null) {
+//        if (cartViewModel != null) {
+//            productItemList.clear()
+//            productItemList.addAll(cartViewModel.cartList)
+//            cartAdapter.notifyDataSetChanged()
+//        }
+        cartViewModel?.cartList?.observe(viewLifecycleOwner) { cartItemList ->
             productItemList.clear()
-            productItemList.addAll(cartViewModel.cartList)
+            if (cartItemList != null) {
+                productItemList.addAll(cartItemList)
+            }
             cartAdapter.notifyDataSetChanged()
         }
         backButton = view.findViewById(R.id.backButtonCart)
