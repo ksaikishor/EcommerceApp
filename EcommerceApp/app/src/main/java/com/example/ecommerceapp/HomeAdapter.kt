@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class HomeAdapter(private val productList : List<Product>,private var itemClick: ItemOnClick) : RecyclerView.Adapter<HomeDataViewHolder>() {
+class HomeAdapter(private val productList : List<Product>,private var itemClick: ItemOnClick,private val cartViewModel: CartViewModel) : RecyclerView.Adapter<HomeDataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeDataViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list, parent, false)
@@ -23,7 +23,7 @@ class HomeAdapter(private val productList : List<Product>,private var itemClick:
 
         holder.itemView.setOnClickListener {
             val productId = products.id
-            itemClick?.itemClick(productId)
+            itemClick?.itemClick(productId,cartViewModel)
         }
     }
 }

@@ -73,24 +73,6 @@ class RegisterFragment : Fragment() {
             updateRegisterButtonState()
         }
 
-
-//        registerBtn.setOnClickListener {
-//            registeredUser = User(
-//                username.text.toString(),
-//                password.text.toString(),
-//                emailId.text.toString(),
-//                address.text.toString()
-//            )
-//            if(registerViewModel.isUserDataValid(registeredUser)) {
-//                Toast.makeText(context,"Registered Successfully",Toast.LENGTH_SHORT).show()
-//                saveUserToSharedPreferences(registeredUser)
-//                Log.i("registered user is ", "$registeredUser")
-//                (requireActivity() as MainActivity).replaceFragment(LoginFragment.newInstance())
-//            }
-//            else{
-//                Toast.makeText(context,"please enter valid data",Toast.LENGTH_SHORT).show()
-//            }
-//        }
         loginBtn.setOnClickListener {
             (requireActivity() as MainActivity).replaceFragment(LoginFragment.newInstance())
         }

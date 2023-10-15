@@ -3,6 +3,7 @@ package com.example.ecommerceapp
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -57,26 +58,29 @@ class ProductDetailFragment : Fragment() {
         addToCart = view.findViewById(R.id.addToCart)
 
         val cartViewModel = (requireActivity() as MainActivity).cartViewModel
-        cartButton.text ="("+cartViewModel?.cartList?.size+")"
+        cartButton.text ="("+cartViewModel?.getCartItemCount()+")"
 
         val productId = arguments?.getInt("productId") ?: -1
         productViewModel.fetchProduct(productId)
         productViewModel.product.observe(viewLifecycleOwner){product->
             productDescriptionTextView.text = "Description:"+"\n"+product.description
             productPrice.text = "$ "+product.price.toString()
-
             rating.text =product.rating?.rate.toString()+" Rating"
             Glide.with(view.context).load(product.image).into(productImageView)
         }
         backButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+
         addToCart.setOnClickListener {
-            Toast.makeText(context,"Item Added to Cart",Toast.LENGTH_SHORT).show()
             productViewModel.product.observe(viewLifecycleOwner) { product ->
-                val cartItem = Product(productId, product.title, product.price,product.description,product.category, product.image,product.rating)
+                Log.i("product img url is",product.image)
+                val cartItem = CartItem(product, 1)
                 cartViewModel?.addItemToCart(cartItem)
-                cartButton.text ="("+cartViewModel?.cartList?.size+")"
+                val cartCount = cartViewModel?.getCartItemCount()
+                Log.i("cart count is","$cartCount")
+                cartButton.text = "($cartCount)"
+                Toast.makeText(context, "Item Added to Cart", Toast.LENGTH_SHORT).show()
             }
         }
 

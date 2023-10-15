@@ -63,4 +63,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    implementation("com.google.code.gson:gson:2.8.8")//for sharedpref of cartviewmodel
+
 }

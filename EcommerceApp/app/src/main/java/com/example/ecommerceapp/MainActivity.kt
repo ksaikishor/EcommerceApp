@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() ,Communicator{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
+        cartViewModel?.initSharedPreferences(applicationContext)
         replaceFragment(LoginFragment.getInstance())
     }
 

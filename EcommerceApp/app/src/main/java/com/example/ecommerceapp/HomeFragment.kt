@@ -45,12 +45,13 @@ class HomeFragment : Fragment() ,ItemOnClick{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val cartViewModel = (requireActivity() as MainActivity).cartViewModel
         welcomeNote = view.findViewById(R.id.welcomeNote)
         welcomeNote.text = "Welcome "+arguments?.getString("username")
         recyclerView = view.findViewById(R.id.recyclerViewHome)
         recyclerView.layoutManager =
             GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
-        adapter = HomeAdapter(productList,this)
+        adapter = cartViewModel?.let { HomeAdapter(productList,this, it) }!!
         recyclerView.adapter = adapter
         progressBar = view.findViewById(R.id.progressBar)
         homeViewModel.fetchProducts()
@@ -67,7 +68,6 @@ class HomeFragment : Fragment() ,ItemOnClick{
         }
 
         cartFromHome = view.findViewById(R.id.cartFromHome)
-        val cartViewModel = (requireActivity() as MainActivity).cartViewModel
         val cartItemCount = cartViewModel?.getCartItemCount()
         cartFromHome.text ="("+cartItemCount+")"
         cartFromHome.setOnClickListener {
@@ -80,7 +80,7 @@ class HomeFragment : Fragment() ,ItemOnClick{
         progressBar.visibility = if (loading) View.VISIBLE else View.GONE
     }
 
-    override fun itemClick(index: Int) {
+    override fun itemClick(index: Int,cartViewModel: CartViewModel) {
         val id = productList[index-1].id
         Log.i("clicked on: ","$id")
         (activity as MainActivity).passData(ProductDetailFragment.newInstance(id))

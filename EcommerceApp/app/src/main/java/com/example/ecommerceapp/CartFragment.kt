@@ -1,7 +1,5 @@
 package com.example.ecommerceapp
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 class CartFragment : Fragment(), ItemOnClick {
 
@@ -23,10 +19,9 @@ class CartFragment : Fragment(), ItemOnClick {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var cartAdapter: CartAdapter
-    private var productItemList: MutableList<Product> = mutableListOf()
+    private var productItemList: MutableList<CartItem> = mutableListOf()
     private lateinit var checkout: Button
     private lateinit var backButton: ImageView
-    private lateinit var cartViewModel:CartViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,14 +33,17 @@ class CartFragment : Fragment(), ItemOnClick {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recyclerViewCart)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        cartAdapter = CartAdapter(productItemList, this)
-        recyclerView.adapter = cartAdapter
         val cartViewModel = (requireActivity() as MainActivity).cartViewModel
-        if (cartViewModel != null) {
+        cartAdapter = cartViewModel?.let { CartAdapter(productItemList, this, it) }!!
+        recyclerView.adapter = cartAdapter
+        cartViewModel?.cartList?.observe(viewLifecycleOwner) { cartItemList ->
             productItemList.clear()
-            productItemList.addAll(cartViewModel.cartList)
+            if (cartItemList != null) {
+                productItemList.addAll(cartItemList)
+            }
             cartAdapter.notifyDataSetChanged()
         }
+
         backButton = view.findViewById(R.id.backButtonCart)
         backButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -57,10 +55,8 @@ class CartFragment : Fragment(), ItemOnClick {
 
     }
 
-    override fun itemClick(index: Int) {
+    override fun itemClick(index: Int,cartViewModel: CartViewModel) {
         Log.i("clicked on", "$index")
-        cartViewModel = (requireActivity() as MainActivity).cartViewModel!!
-        cartAdapter.removeProduct(index)
         cartViewModel.removeItemFromCart(index)
         cartAdapter.notifyItemRemoved(index)
     }
