@@ -3,6 +3,7 @@ package com.example.ecommerceapp
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import kotlin.math.log
 
 class LoginViewModelTest {
     private lateinit var  loginViewModel : LoginViewModel
@@ -24,5 +25,15 @@ class LoginViewModelTest {
     fun `validating empty user details`(){
         val result = loginViewModel.isValid("","","","")
         Assert.assertEquals(false,result)
+    }
+    @Test
+    fun `validating username`(){
+        val result = loginViewModel.isUsernameValid("kishore")
+        Assert.assertEquals(true,result)
+    }
+    @Test
+    fun `validating password`(){
+        val result = loginViewModel.isPasswordValid("123345")
+        Assert.assertEquals(true,result)
     }
 }

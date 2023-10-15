@@ -10,4 +10,12 @@ class LoginViewModel : ViewModel() {
             false
         }
     }
+    fun isUsernameValid(username: String): Boolean {
+        return username.length >= 3
+    }
+
+    fun isPasswordValid(password: String): Boolean {
+        return password.length >= 4
+    }
+
 }

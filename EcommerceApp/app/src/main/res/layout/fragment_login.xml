@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,35 +8,45 @@
     android:id="@+id/loginFragment"
     tools:context=".LoginFragment">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:hint="@string/username"
         android:layout_marginTop="100dp"
-        />
-    <EditText
+        android:id="@+id/usernamelayout"
+        android:hint="@string/username">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/username" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_marginTop="150dp"
-        />
+        android:layout_marginTop="200dp"
+        android:id="@+id/passwordlayout"
+        android:hint="@string/password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Login"
-        android:layout_marginTop="200dp"
-        android:text="@string/login"
-        />
+        android:layout_marginTop="300dp"
+        android:text="@string/login" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Register"
-        android:layout_marginTop="250dp"
-        android:text="Register"
-        />
-
+        android:layout_marginTop="380dp"
+        android:text="Register" />
 
 </FrameLayout>

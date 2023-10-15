@@ -26,11 +26,11 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun isPasswordValid(password: String): Boolean {
-        return password.matches(Regex("^\\d{5}$"))
+        return password.length>=4
     }
 
     fun isAddressValid(address: String): Boolean {
-        return address.matches(Regex("^\\d{3}$"))
+        return address.length>=3
     }
 
 }

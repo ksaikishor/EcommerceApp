@@ -104,6 +104,8 @@ class RegisterFragment : Fragment() {
             registerBtn.isEnabled = true
             registerBtn.setOnClickListener {
                 Toast.makeText(context, "Registered Successfully", Toast.LENGTH_SHORT).show()
+                val cartViewModel = (requireActivity() as MainActivity).cartViewModel
+                cartViewModel?.clearCart()
                 saveUserToSharedPreferences(registeredUser)
                 Log.i("registered user is ", "$registeredUser")
                 (activity as Communicator).passData(LoginFragment.newInstance())
