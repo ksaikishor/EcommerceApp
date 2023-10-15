@@ -34,7 +34,7 @@ class CartViewHolder(itemView: View, itemOnClick: ItemOnClick) : RecyclerView.Vi
         itemView.findViewById<TextView>(R.id.productDescription).text = product.description
         itemView.findViewById<TextView>(R.id.count).text = "Count: " + cartItem.count
         val image = itemView.findViewById<ImageView>(R.id.productImage)
-        itemView.findViewById<TextView>(R.id.price).text = "Price: $ " + product.price
+        itemView.findViewById<TextView>(R.id.price).text = "Price: $ " + cartItem.count*product.price
         Glide.with(itemView).load(product.image).into(image)
     }
 }

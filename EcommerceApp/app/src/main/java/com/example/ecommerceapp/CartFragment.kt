@@ -1,7 +1,5 @@
 package com.example.ecommerceapp
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 class CartFragment : Fragment(), ItemOnClick {
 
@@ -41,11 +37,6 @@ class CartFragment : Fragment(), ItemOnClick {
         cartAdapter = CartAdapter(productItemList, this)
         recyclerView.adapter = cartAdapter
         val cartViewModel = (requireActivity() as MainActivity).cartViewModel
-//        if (cartViewModel != null) {
-//            productItemList.clear()
-//            productItemList.addAll(cartViewModel.cartList)
-//            cartAdapter.notifyDataSetChanged()
-//        }
         cartViewModel?.cartList?.observe(viewLifecycleOwner) { cartItemList ->
             productItemList.clear()
             if (cartItemList != null) {
