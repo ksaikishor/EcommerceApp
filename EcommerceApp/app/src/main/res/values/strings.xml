@@ -17,5 +17,8 @@
     <string name="product_description">Product Description</string>
     <string name="count">count</string>
     <string name="price">price</string>
+    <string name="address">Address</string>
+    <string name="pass">password</string>
+    <string name="email">Email</string>
 
 </resources>
