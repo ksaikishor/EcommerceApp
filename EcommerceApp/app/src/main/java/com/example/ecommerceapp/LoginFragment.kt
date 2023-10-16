@@ -1,15 +1,15 @@
 package com.example.ecommerceapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -18,6 +18,7 @@ class LoginFragment : Fragment() {
 
     companion object {
         fun newInstance() = LoginFragment()
+        @SuppressLint("StaticFieldLeak")
         private var instance: LoginFragment? = null
         fun getInstance(): LoginFragment {
             if (instance == null) {
@@ -44,6 +45,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         username = view.findViewById(R.id.username)
         password = view.findViewById(R.id.password)
         usernameLayout = view.findViewById(R.id.usernamelayout)
@@ -52,28 +54,16 @@ class LoginFragment : Fragment() {
         loginButton = view.findViewById(R.id.Login)
         registerButton = view.findViewById(R.id.Register)
 
-        username.addTextChangedListener {
-            usernameLayout.error = null
-        }
-        password.addTextChangedListener {
-            passwordLayout.error = null
-        }
+        setupTextChangeListeners()
+
         loginButton.setOnClickListener {
             val userName = username.text.toString()
-            Log.i("username typed is", userName)
-
             val pwd = password.text.toString()
-            Log.i("password typed is", pwd)
+
             if (loginUser(userName, pwd)) {
                 (activity as Communicator).passData(HomeFragment.newInstance(userName))
             } else {
                 Toast.makeText(context, "Please enter valid credentials", Toast.LENGTH_SHORT).show()
-                if (!loginViewModel.isUsernameValid(userName)) {
-                    usernameLayout.error = "Invalid Username"
-                }
-                if (!loginViewModel.isPasswordValid(pwd)) {
-                    passwordLayout.error = "Invalid Password"
-                }
             }
         }
 
@@ -82,15 +72,22 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun setupTextChangeListeners() {
+        username.addTextChangedListener { text ->
+            val userName = text.toString()
+            usernameLayout.error = if (userName.isNotEmpty() && !loginViewModel.isUsernameValid(userName)) "Invalid Username" else null
+        }
+
+        password.addTextChangedListener { text ->
+            val pwd = text.toString()
+            passwordLayout.error = if (pwd.isNotEmpty() && !loginViewModel.isPasswordValid(pwd)) "Invalid Password" else null
+        }
+    }
+
     private fun loginUser(username: String, password: String): Boolean {
         val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        Log.i("sharedPref from login fragment", "$sharedPreferences")
         val savedUsername = sharedPreferences.getString("username", "")
-        Log.i("saved user is", "$savedUsername")
         val savedPassword = sharedPreferences.getString("password", "")
-        Log.i("saved pwd is", "$savedPassword")
-        val isValidated = loginViewModel.isValid(savedUsername ?: "", savedPassword ?: "", username, password)
-        Log.i("isValidated", "$isValidated")
-        return isValidated
+        return loginViewModel.isValid(savedUsername ?: "", savedPassword ?: "", username, password)
     }
 }

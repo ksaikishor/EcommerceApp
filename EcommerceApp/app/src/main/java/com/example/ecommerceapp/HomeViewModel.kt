@@ -9,7 +9,7 @@ class HomeViewModel(private val productRepository: ProductRepositoryImplement) :
     val productList = MutableLiveData<List<Product>?>()
 
     val isLoading = MutableLiveData(false)
-    val errorLiveDataProducts = MutableLiveData(false)
+    private val errorLiveDataProducts = MutableLiveData(false)
 
     fun fetchProducts(){
         isLoading.value = true

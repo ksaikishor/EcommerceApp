@@ -2,6 +2,7 @@ package com.example.ecommerceapp
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
@@ -9,7 +10,7 @@ import com.google.gson.reflect.TypeToken
 
 class CartViewModel : ViewModel() {
     private val _cartList = MutableLiveData<MutableList<CartItem>?>()
-    val cartList: MutableLiveData<MutableList<CartItem>?> = _cartList
+    val cartList: LiveData<MutableList<CartItem>?> = _cartList
 
     private lateinit var sharedPreferences: SharedPreferences
     private val gson = Gson()
@@ -43,7 +44,7 @@ class CartViewModel : ViewModel() {
         } else {
             _cartList.value?.add(cartItem)
         }
-        _cartList.postValue(_cartList.value) // Update LiveData
+        _cartList.postValue(_cartList.value)
         saveCartToSharedPreferences()
     }
 
